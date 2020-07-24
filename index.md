@@ -1,37 +1,6 @@
-## Welcome to GitHub Pages
+## Overview
+The On Semiconductor RSL10 System on a Chip (SoC) is a really neat, _very_ low power microprocessor / RF front end combination chip. This objective of this rough page is to outline the process of getting started developing applications with the On Semiconducter RSL10 SDK and dive deeper into some of the functionalities of this chip.
 
-You can use the [editor on GitHub](https://github.com/charlesramey/RSL10Hackery/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+## Getting to Blinky
+Fortunately, the getting started PDF straight from On Semi was actually extremely comprehensive and provided pretty much step by step instructions from unboxing the SoC development board, to intalling the Eclipse based SDK, to loading the blinky example code, to finally programming the SoC board and running the blinky code on the platform. All in all, the process of unboxing the SoC to running the blinky example took less than an hour and a half. [You can find this excellent peice of documentation here.](https://www.onsemi.com/pub/Collateral/RSL10%20GETTING%20STARTED%20GUIDE.PDF)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/charlesramey/RSL10Hackery/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
