@@ -1,4 +1,5 @@
 ## Overview
+![The RSL10-SIP-001GEVB evaluation board I am working with](https://charlesramey.github.io/RSL10Hackery/images/RSL10-SIP-001GEVB.jpg)
 The On Semiconductor RSL10 System on a Chip (SoC) is a really neat, _very_ low power microprocessor / RF front end combination chip. This objective of this rough page is to outline the process of getting started developing applications with the On Semiconducter RSL10 SDK and dive deeper into some of the functionalities of this chip.
 
 ## Getting to Blinky
