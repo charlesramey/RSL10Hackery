@@ -57,8 +57,10 @@ You'll notice in the code snippet above that the printf statements are disabled 
  #endif
   ```
   Got print statementss working. 
-  *One final gotya though*: In order to actually see the print statements in realtime, you need to use the J-Link Viewer application (which the SDK installs during the J-Link driver install process).
-
+  *One final gotya though*: In order to actually see the print statements in realtime, you need to use the J-Link Viewer application (which the SDK installs during the J-Link driver install process). 
+### Using the J-Link Viewer
+Fortunately viewing the UART output of the RSL10 via the J-Link programmer built in to the on-board ARM Cortex chip, is super easy. Once you launch the J-Link Viewer application, simply configure the settings as they are in the following picture, click the "go" button, and switch to the "All Terminals" tab. 
+![The J-Link Viewer application showing the appropriate settings and print statments](https://charlesramey.github.io/RSL10Hackery/images/jlink_viewer.png)
  
   
  
