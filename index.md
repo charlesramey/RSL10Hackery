@@ -9,7 +9,7 @@ Fortunately, the getting started PDF straight from On Semi was actually extremel
 ### Print Configuration out of the Box
 The print.h file which the Blinky example includes looks like this out of the box from the SDK
 
-'''C
+```C
 #ifndef PRINTF_H
 #define PRINTF_H
 
@@ -42,6 +42,23 @@ The print.h file which the Blinky example includes looks like this out of the bo
 #endif
 
 #endif /* PRINTF_H */
-'''
+```
 ### Custom Print Configuration
+You'll notice in the code snippet above that the printf statements are disabled by default but we are given two options for outputting print statements: RTT and UART. I found the documentation (linked above) to be perhaps out of date with the SDK code expamples for this particular development board. Part of the confustion with getting print statments to work revolved around just how the development board was being programmed over USB and wether we need to utilize RTT or UART. Long story short, I found that by switching:
+```
+ #ifndef OUTPUT_INTERFACE
+     #define OUTPUT_INTERFACE           OUTPUT_DISABLED
+ #endif
+ ```
+ to
+ ```
+  #ifndef OUTPUT_INTERFACE
+     #define OUTPUT_INTERFACE           OUTPUT_UART
+ #endif
+  ```
+  Got print statementss working. 
+  *One final gotya though*: In order to actually see the print statements in realtime, you need to use the J-Link Viewer application (which the SDK installs during the J-Link driver install process).
 
+ 
+  
+ 
