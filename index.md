@@ -1,14 +1,13 @@
 ## Overview
 ![The RSL10-SIP-001GEVB evaluation board I am working with](https://charlesramey.github.io/RSL10Hackery/images/RSL10-SIP-001GEVB.jpg)  
 
-The On Semiconductor RSL10 System on a Chip (SoC) is a really neat, _very_ low power microprocessor / RF front end combination chip. This objective of this rough page is to outline the process of getting started developing applications with the On Semiconducter RSL10 SDK and dive deeper into some of the functionalities of this chip.
+The On Semiconductor RSL10 System on a Chip (SoC) is a really neat, _very_ low power microprocessor / RF front end combination chip. The objective of this rough page is to outline the process of getting started developing applications with the On Semiconductor RSL10 SDK and dive deeper into some of the functionalities of this chip.
 ## Table of Contents
 - [Getting to Blinky](#getting-to-blinky)
 - [Figuring Out How to View printfs](#figuring-out-how-to-view-printfs)
 - [Using the ADC](#using-the-adc)  
-
 ## Getting to Blinky
-Fortunately, the getting started PDF straight from On Semi was actually extremely comprehensive and provided pretty much step by step instructions from unboxing the SoC development board, to intalling the Eclipse based SDK, to loading the blinky example code, to finally programming the SoC board and running the blinky code on the platform. All in all, the process of unboxing the SoC to running the blinky example took less than an hour and a half. [You can find this excellent peice of documentation here.](https://www.onsemi.com/pub/Collateral/RSL10%20GETTING%20STARTED%20GUIDE.PDF)
+Fortunately, the getting started PDF straight from On Semi was actually extremely comprehensive and provided pretty much step by step instructions from unboxing the SoC development board, to installing the Eclipse based SDK, to loading the blinky example code, to finally programming the SoC board and running the blinky code on the platform. All in all, the process of unboxing the SoC to running the blinky example took less than an hour and a half. [You can find this excellent piece of documentation here.](https://www.onsemi.com/pub/Collateral/RSL10%20GETTING%20STARTED%20GUIDE.PDF)
 
 ## Figuring out how to view printfs
 ### Print Configuration out of the Box
@@ -49,7 +48,7 @@ The print.h file which the Blinky example includes looks like this out of the bo
 #endif /* PRINTF_H */
 ```
 ### Custom Print Configuration
-You'll notice in the code snippet above that the printf statements are disabled by default but we are given two options for outputting print statements: RTT and UART. I found the documentation (linked above) to be perhaps out of date with the SDK code expamples for this particular development board. Part of the confustion with getting print statments to work revolved around just how the development board was being programmed over USB and wether we need to utilize RTT or UART. Long story short, I found that by switching:
+You'll notice in the code snippet above that the printf statements are disabled by default but we are given two options for outputting print statements: RTT and UART. I found the documentation (linked above) to be perhaps out of date with the SDK code examples for this particular development board. Part of the confusion with getting print statements to work revolved around just how the development board was being programmed over USB and whether we needed to utilize RTT or UART. Long story short, I found that by switching:
 ```
  #ifndef OUTPUT_INTERFACE
      #define OUTPUT_INTERFACE           OUTPUT_DISABLED
@@ -61,15 +60,15 @@ You'll notice in the code snippet above that the printf statements are disabled 
      #define OUTPUT_INTERFACE           OUTPUT_UART
  #endif
   ```
-  Got print statementss working. 
+  Got print statements working. 
   *One final gotya though*: In order to actually see the print statements in realtime, you need to use the J-Link Viewer application (which the SDK installs during the J-Link driver install process). 
 ### Using the J-Link Viewer
-Fortunately viewing the UART output of the RSL10 via the J-Link programmer built in to the on-board ARM Cortex chip, is super easy. Once you launch the J-Link Viewer application, simply configure the settings as they are in the following picture, click the "go" button, and switch to the "All Terminals" tab.  
+Fortunately viewing the UART output of the RSL10 via the J-Link programmer built into the on-board ARM Cortex chip, is super easy. Once you launch the J-Link Viewer application, simply configure the settings as they are in the following picture, click the "go" button, and switch to the "All Terminals" tab.  
 
 ![The J-Link Viewer application showing the appropriate settings and print statments](https://charlesramey.github.io/RSL10Hackery/images/jlink_viewer.PNG)
  
 ## Using the ADC
-The RSL10 SDK ships with an ADC example which implements all the necessary code to read from one of the system's specific analog-to-digital convertors (ADC) which happens to be connected to the battery voltage input line. This particular example, called "ADC_UART", reads from this specific Battery Monitor ADC, adds 100 battery voltage samples to a summation variable, and then divides that variable by 100 to end up with an average battery voltage sample. Simple enough, right? 
+The RSL10 SDK ships with an ADC example which implements all the necessary code to read from one of the system's specific analog-to-digital converters (ADC) which happens to be connected to the battery voltage input line. This particular example, called "ADC_UART", reads from this specific Battery Monitor ADC, adds 100 battery voltage samples to a summation variable, and then divides that variable by 100 to end up with an average battery voltage sample. Simple enough, right? 
 ```
  /* Disable all existing interrupts, clearing all pending source */
     Sys_NVIC_DisableAllInt();
@@ -145,4 +144,4 @@ The RSL10 SDK ships with an ADC example which implements all the necessary code 
     NVIC_EnableIRQ(ADC_BATMON_IRQn);
 ```
 Well in theory, _yes_, simple. In practice (as you see above), this example requires a 8MHz clock signal to trigger a function which samples from the ADC 8 million times a second. This dedicated sampling function is configured as an interrupt and linked to the 8Mhz clock trigger when everything is configured initially.  
-All of this ends up leading to (in my opinion) a fair bit of oqaque configuaration code which makes me want to bang my head against a wall. So, what we'll walk through now is how to sample with a ADC of our choosing by manually asking for the current measurement instead of automatically scheduling an interrupt to do so for us.
+All of this ends up leading to (in my opinion) a fair bit of opaque configuration code which makes me want to bang my head against a wall. So, what we'll walk through now is how to sample with an ADC of our choosing by manually asking for the current measurement instead of automatically scheduling an interrupt to do so for us.
